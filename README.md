@@ -8,11 +8,11 @@
 - `Java 1.8`
 - `html`
 - `Thymeleaf`
+- `Spring Boot 2.4.4`
+- `Gradle 6.8.3`
 
 __built with__
 - `IntelliJ 2021.02`
-- `Spring Boot 2.4.4`
-- `Gradle 6.8.3`
 
 ```
 clone & run
