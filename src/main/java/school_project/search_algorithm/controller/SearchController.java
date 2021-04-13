@@ -25,8 +25,8 @@ public class SearchController {
     }
 
     @PostMapping("result")
-    public String searchResult(@ModelAttribute SearchOption searchOpt) {
-        System.out.println(search.result(searchOpt).toString());
+    public String searchResult(@ModelAttribute SearchOption searchOpt, Model model) {
+        model.addAttribute("resultList", search.result(searchOpt));
         return "result";
     }
 }

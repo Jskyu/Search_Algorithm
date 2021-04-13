@@ -6,7 +6,31 @@
 <body>
 <div class="container">
     <div th:replace="fragments/bodyHeader :: bodyHeader"/>
-    result
+    <div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>탐색방법</th>
+                <th>찾는값</th>
+                <th>찾은값</th>
+                <th>시작시간</th>
+                <th>경과시간</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="result : ${resultList}">
+                <td th:text="${result.getName()}"></td>
+                <td th:text="${result.getKey()}"></td>
+                <td th:text="${result.getIndex()}"></td>
+                <td th:text="${result.getStartDateTime()}"></td>
+                <td th:text="${result.getElapsedTime()}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <a href="/search" class="btn btn-info">다시 검색하기</a>
+        <br>
+    </div>
     <br>
     <div th:replace="fragments/footer :: footer"/>
 </div> <!-- /container -->

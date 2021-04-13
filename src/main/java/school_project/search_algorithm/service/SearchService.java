@@ -10,14 +10,16 @@ import java.util.stream.Collectors;
 
 public class SearchService {
 
-    private final int size = 10000;
+    private final int size = 100000;
 
     private final List<Integer> list = new ArrayList<>();
     List<Integer> sortList;
     private final int[] hash = new int[size];
 
+    private final List<SearchResult> resultList = new ArrayList<>();
+
     public SearchService() {
-        //1~10000의 숫자를 랜덤하게 list에 입력
+        //1~100000의 숫자를 겹치지 않고 랜덤하게 list에 입력
         Stack<Integer> stack = new Stack<>();
         for (int i = 0; i < size; i++) {
             stack.add(i + 1);
@@ -93,22 +95,28 @@ public class SearchService {
         }
     }
 
-    public SearchResult result(SearchOption searchOpt) {
+    public List<SearchResult> result(SearchOption searchOpt) {
         String opt = searchOpt.getOpt();
         int key = searchOpt.getKey();
-
+        double startTime = System.currentTimeMillis();
         switch (opt) {
             case "정렬 순차탐색":
-                return new SearchResult("정렬 순차 탐색", System.currentTimeMillis(), key, this.sortedLinearSearch(sortList, key));
+                resultList.add(new SearchResult("정렬 순차 탐색", key, this.sortedLinearSearch(sortList, key)));
+                break;
             case "비정렬 순차탐색":
-                return new SearchResult("비정렬 순차 탐색", System.currentTimeMillis(), key, this.notSortedLinearSearch(key));
+                resultList.add(new SearchResult("비정렬 순차 탐색", key, this.notSortedLinearSearch(key)));
+                break;
             case "이진탐색":
-                return new SearchResult("이진 탐색", System.currentTimeMillis(), key, this.binarySearch(sortList, key));
+                resultList.add(new SearchResult("이진 탐색", key, this.binarySearch(sortList, key)));
+                break;
             case "해시탐색":
-                return new SearchResult("해시 탐색", System.currentTimeMillis(), key, this.hashSearch(key));
+                resultList.add(new SearchResult("해시 탐색", key, this.hashSearch(key)));
+                break;
             default:
                 throw new IllegalArgumentException();
         }
+        resultList.get(resultList.size()-1).setElapsedTime((System.currentTimeMillis() - startTime) / 1000);
+        return resultList;
     }
 
 
