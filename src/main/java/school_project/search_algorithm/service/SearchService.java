@@ -37,6 +37,10 @@ public class SearchService {
         }
     }
 
+    public List<SearchResult> getResult() {
+        return this.resultList;
+    }
+
     public int notSortedLinearSearch(int key) {
 
         for (int i = 0; i < list.size(); i++) {
@@ -142,7 +146,7 @@ public class SearchService {
         return num % size;
     }
 
-    public boolean set(int num) {
+    private boolean set(int num) {
         int idx = getEmptySpace(num);
         if (idx < 0) {
             return false;
