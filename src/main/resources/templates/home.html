@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+    <div class="jumbotron">
+        <h1>Search Algorithm</h1>
+        <h3 class="text-muted">코딩 및 알고리즘</h3>
+        <br><br>
+        <p>
+            <a class="btn btn-lg btn-info" href="/search">검색 시작하기</a>
+        </p>
+        <br><br>
+        <h3 class="text-muted">1612042 정성규</h3> <a href="https://github.com/Jskyu/Search_Algorithm">Github</a>
+    </div>
+    <div th:replace="fragments/footer :: footer"/>
+</div> <!-- /container -->
+</body>
+</html>
