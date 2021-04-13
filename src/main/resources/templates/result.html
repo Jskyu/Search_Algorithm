@@ -1,10 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>result</title>
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-result
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+    result
+    <br>
+    <div th:replace="fragments/footer :: footer"/>
+</div> <!-- /container -->
 </body>
 </html>
