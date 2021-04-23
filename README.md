@@ -6,10 +6,11 @@
 
 # Tech
 - `Java 1.8`
-- `html`
-- `Thymeleaf`
 - `Spring Boot 2.4.4`
 - `Gradle 6.8.3`
+- `Thymeleaf`
+- `HTML5`
+- `Bootstrap (JS, CSS Open Source)`
 
 __built with__
 - `IntelliJ 2021.02`
@@ -17,6 +18,8 @@ __built with__
 ```
 clone & run
 git clone https://github.com/Jskyu/Search_Algorithm.git
+gradlew clean
+gradlew build
 gradlew bootRun
 ```
 

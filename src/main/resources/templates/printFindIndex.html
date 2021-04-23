@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+    <div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>index</th>
+                <th>값</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:value="${result}">
+                <td th:text="${result.getIndex()}"></td>
+                <td th:text="${result.getValue()}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <a href="/search" class="btn btn-info">검색하기</a>
+        <br>
+    </div>
+    <br>
+    <div th:replace="fragments/footer :: footer"/>
+</div> <!-- /container -->
+</body>
+</html>

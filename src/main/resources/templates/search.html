@@ -20,14 +20,32 @@
 
         <div class="form-group">
             <label th:for="key">찾을 값 1~100000</label>
-            <input type="number" th:field="*{key}" class="form-control"
-                   placeholder="찾을 값을 입력하세요.">
+            <input type="number" th:field="*{key}" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <br>
+    <form role="form" action="/search/findArray" th:object="${searchOpt}"
+          method="post">
+        <div class="form-group">
+            <label th:field="opt">배열 확인하기</label>
+            <label>
+                <select name="opt" class="form-control">
+                    <option value="비정렬">비정렬 배열</option>
+                    <option value="순차정렬">순차 정렬 배열</option>
+                    <option value="해싱">해싱 배열</option>
+                </select>
+            </label>
+        </div>
+        <div class="form-group">
+            <label th:for="key">찾을 인덱스 값 1~100000</label>
+            <input type="number" th:field="*{key}" class="form-control">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
     <br>
     <br>
-    <p>
+    <p align="right">
         <a class="btn btn-lg btn-info" methods="get" href="/search/result">검색 목록 보기</a>
     </p>
     <br/>

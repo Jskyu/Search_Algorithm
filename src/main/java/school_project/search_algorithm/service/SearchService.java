@@ -1,5 +1,6 @@
 package school_project.search_algorithm.service;
 
+import school_project.search_algorithm.search.IndexResult;
 import school_project.search_algorithm.search.SearchOption;
 import school_project.search_algorithm.search.SearchResult;
 
@@ -16,6 +17,14 @@ public class SearchService {
     List<Integer> sortList;
     private final int[] hash = new int[size];
 
+    public List<IndexResult> getBefore() {
+        List<IndexResult> beforeList = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            beforeList.add(new IndexResult(i, list.get(i)));
+        }
+        return beforeList;
+    }
+
     private final List<SearchResult> resultList = new ArrayList<>();
 
     public SearchService() {
@@ -24,6 +33,7 @@ public class SearchService {
         for (int i = 0; i < size; i++) {
             stack.add(i + 1);
         }
+        //비정렬 리스트 입력
         while (stack.size() > 0) {
             int rand = (int) (Math.random() * stack.size());
             list.add(stack.remove(rand));
@@ -117,15 +127,35 @@ public class SearchService {
                 resultList.add(new SearchResult("해시 탐색", key, this.hashSearch(key)));
                 break;
             default:
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("잘못된 접근");
         }
         resultList.get(resultList.size()-1).setElapsedTime((System.currentTimeMillis() - startTime) / 1000);
         return resultList;
     }
 
+    public IndexResult findIndex(SearchOption searchOpt){
+        IndexResult array;
+
+        String opt = searchOpt.getOpt();
+        int key = searchOpt.getKey();
+        switch (opt) {
+            case "순차정렬":
+                array = new IndexResult(key, sortList.get(key));
+                break;
+            case "비정렬":
+                array = new IndexResult(key, list.get(key));
+                break;
+            case "해싱":
+                array = new IndexResult(key, hash[key]);
+                break;
+            default:
+                throw new IllegalArgumentException("잘못된 접근");
+        }
+        return array;
+    }
+
 
     //hash method
-
     private int getEmptySpace(int num) {
         int idx = hash(num);
         int i = 0;
