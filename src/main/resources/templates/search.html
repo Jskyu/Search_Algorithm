@@ -45,11 +45,12 @@
     </form>
     <br>
     <br>
-    <p align="right">
-        <a class="btn btn-lg btn-info" methods="get" href="/search/result">검색 목록 보기</a>
-    </p>
-    <br/>
-    <div th:replace="fragments/footer :: footer"/>
+    <a class="btn btn-lg btn-info" href="/search/result">검색 목록</a>
+    <a class="btn btn-lg btn-info" href="/search/reset" onclick="alert('초기화 되었습니다.')">비정렬 배열 초기화</a>
+
+    <br>
+    <br>
+    <div th:replace="fragments/footer :: footer"></div>
 </div> <!-- /container -->
 </body>
 </html>

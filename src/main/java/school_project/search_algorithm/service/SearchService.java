@@ -17,15 +17,6 @@ public class SearchService {
     private final List<Integer> list = new ArrayList<>();
     private List<Integer> sortList;
     private final int[] hash = new int[size];
-
-    public List<IndexResult> getBefore() {
-        List<IndexResult> beforeList = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            beforeList.add(new IndexResult(i, list.get(i)));
-        }
-        return beforeList;
-    }
-
     private final List<SearchResult> resultList = new ArrayList<>();
 
     public SearchService() {
@@ -41,16 +32,8 @@ public class SearchService {
         }
     }
 
-    private void setNotSortedList() {
-        Stack<Integer> stack = new Stack<>();
-        for (int i = 1; i <= size; i++) {
-            stack.add(i);
-        }
-        //비정렬 리스트 입력
-        while (stack.size() > 0) {
-            int rand = (int) (Math.random() * stack.size());
-            list.add(stack.remove(rand));
-        }
+    public void unOrderedListReset(){
+        this.setNotSortedList();
     }
 
     public List<SearchResult> getResult() {
@@ -160,6 +143,7 @@ public class SearchService {
 
 
     //hash method
+
     private int getEmptySpace(int num) {
         int idx = num % size;
         int i = 0;
@@ -175,12 +159,24 @@ public class SearchService {
         }
         return idx;
     }
-
     private void set(int num) {
         int idx = getEmptySpace(num);
         if (idx < 0) {
             return;
         }
         hash[idx] = num;
+    }
+
+    private void setNotSortedList() {
+        list.clear();
+        Stack<Integer> stack = new Stack<>();
+        for (int i = 1; i <= size; i++) {
+            stack.add(i);
+        }
+        //비정렬 리스트 입력
+        while (stack.size() > 0) {
+            int rand = (int) (Math.random() * stack.size());
+            list.add(stack.remove(rand));
+        }
     }
 }

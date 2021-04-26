@@ -50,4 +50,11 @@ public class SearchController {
         model.addAttribute("result", findIndex);
         return "printFindIndex";
     }
+
+    @GetMapping("reset")
+    public String resetList(){
+        log.info("비정렬 리스트 초기화");
+        search.unOrderedListReset();
+        return "redirect:";
+    }
 }
