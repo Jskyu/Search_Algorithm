@@ -1,4 +1,4 @@
-package school_project.search_algorithm.search;
+package school_project.search_algorithm.dto;
 
 public class IndexResult {
     private int index;

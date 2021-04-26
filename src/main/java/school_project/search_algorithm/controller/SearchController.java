@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import school_project.search_algorithm.search.IndexResult;
-import school_project.search_algorithm.search.SearchOption;
-import school_project.search_algorithm.search.SearchResult;
+import school_project.search_algorithm.dto.IndexResult;
+import school_project.search_algorithm.dto.SearchOption;
+import school_project.search_algorithm.dto.SearchResult;
 import school_project.search_algorithm.service.SearchService;
 
 import java.util.List;

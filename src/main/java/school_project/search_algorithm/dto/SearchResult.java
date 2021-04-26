@@ -1,4 +1,4 @@
-package school_project.search_algorithm.search;
+package school_project.search_algorithm.dto;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
