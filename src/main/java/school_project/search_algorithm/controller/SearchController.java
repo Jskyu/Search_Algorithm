@@ -7,12 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import school_project.search_algorithm.dto.IndexResult;
 import school_project.search_algorithm.dto.SearchOption;
-import school_project.search_algorithm.dto.SearchResult;
 import school_project.search_algorithm.service.SearchService;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/search")
@@ -30,9 +26,8 @@ public class SearchController {
 
     @PostMapping("result")
     public String searchResult(@ModelAttribute SearchOption searchOpt, Model model) {
-        log.info(searchOpt.getOpt() + " 실행. 입력 값 : "+searchOpt.getKey());
-        List<SearchResult> result = search.result(searchOpt);
-        model.addAttribute("resultList", result);
+        log.info(searchOpt.getOpt() + " 실행. 입력 값 : " + searchOpt.getKey());
+        model.addAttribute("resultList", search.result(searchOpt));
         return "result";
     }
 
@@ -43,16 +38,15 @@ public class SearchController {
         return "result";
     }
 
-    @PostMapping("findArray")
+    @PostMapping("findIndex")
     public String findArray(@ModelAttribute SearchOption searchOpt, Model model) {
-        log.info(searchOpt.getOpt()+"리스트 "+ searchOpt.getKey() + "번 인덱스 조회");
-        IndexResult findIndex = search.findIndex(searchOpt);
-        model.addAttribute("result", findIndex);
+        log.info(searchOpt.getOpt() + "리스트 " + searchOpt.getKey() + "번 인덱스 조회");
+        model.addAttribute("result", search.findIndex(searchOpt));
         return "printFindIndex";
     }
 
     @GetMapping("reset")
-    public String resetList(){
+    public String resetList() {
         log.info("비정렬 리스트 초기화");
         search.unOrderedListReset();
         return "redirect:";

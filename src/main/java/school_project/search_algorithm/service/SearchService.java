@@ -11,12 +11,12 @@ import java.util.stream.Collectors;
 
 public class SearchService {
 
-    private final int size = 100000;
+    private final int SIZE = 100000;
     private final int NOT_FOUND_CODE = -1;
 
     private final List<Integer> list = new ArrayList<>();
-    private List<Integer> sortList;
-    private final int[] hash = new int[size];
+    private final List<Integer> sortList;
+    private final int[] hash = new int[SIZE];
     private final List<SearchResult> resultList = new ArrayList<>();
 
     public SearchService() {
@@ -27,12 +27,13 @@ public class SearchService {
         sortList = list.stream().sorted().collect(Collectors.toList());
 
         //1~10000의 숫자를 해시 탐색법으로 입력
-        for (int i = 1; i <= size; i++) {
+        for (int i = 1; i <= SIZE; i++) {
             this.set(i);
         }
     }
 
     public void unOrderedListReset(){
+        this.list.clear();
         this.setNotSortedList();
     }
 
@@ -77,7 +78,7 @@ public class SearchService {
     }
 
     public int hashSearch(int key) {
-        int index = key % size;
+        int index = key % SIZE;
 
         if (this.hash[index] != key) {
             index++;
@@ -85,10 +86,10 @@ public class SearchService {
             while (this.hash[index] != key) {
                 index++;
                 i++;
-                if (index == this.size) {
+                if (index == this.SIZE) {
                     index = 0;
                 }
-                if (i == this.size) {
+                if (i == this.SIZE) {
                     return NOT_FOUND_CODE;
                 }
             }
@@ -141,42 +142,40 @@ public class SearchService {
         return array;
     }
 
+    private void setNotSortedList() {
+        Stack<Integer> stack = new Stack<>();
+        for (int i = 1; i <= SIZE; i++) {
+            stack.add(i);
+        }
+        while (stack.size() > 0) {
+            int rand = (int) (Math.random() * stack.size());
+            list.add(stack.remove(rand));
+        }
+    }
+
 
     //hash method
-
     private int getEmptySpace(int num) {
-        int idx = num % size;
+        int idx = num % SIZE;
         int i = 0;
         while (this.hash[i] != 0) {
             idx++;
             i++;
-            if (idx == this.size) {
+            if (idx == this.SIZE) {
                 idx = 0;
             }
-            if (i == this.size) {
+            if (i == this.SIZE) {
                 return NOT_FOUND_CODE;
             }
         }
         return idx;
     }
+
     private void set(int num) {
         int idx = getEmptySpace(num);
         if (idx < 0) {
             return;
         }
         hash[idx] = num;
-    }
-
-    private void setNotSortedList() {
-        list.clear();
-        Stack<Integer> stack = new Stack<>();
-        for (int i = 1; i <= size; i++) {
-            stack.add(i);
-        }
-        //비정렬 리스트 입력
-        while (stack.size() > 0) {
-            int rand = (int) (Math.random() * stack.size());
-            list.add(stack.remove(rand));
-        }
     }
 }

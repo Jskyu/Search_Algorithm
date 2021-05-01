@@ -8,8 +8,8 @@ public class SearchResult {
 
     private int index;
     private int key;
-    private String startDateTime;
-    private double startTime;
+    private final String startDateTime;
+    private final double startTime;
     private double elapsedTime;
 
     public SearchResult(String name, int key, int index) {
