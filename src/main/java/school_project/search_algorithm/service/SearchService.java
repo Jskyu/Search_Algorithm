@@ -20,13 +20,10 @@ public class SearchService {
     private final List<SearchResult> resultList = new ArrayList<>();
 
     public SearchService() {
-        //1~100000의 숫자를 겹치지 않고 랜덤하게 list에 입력
         setNotSortedList();
+        sortList = list.stream().sorted()
+                .collect(Collectors.toList());
 
-        //정렬 리스트 입력
-        sortList = list.stream().sorted().collect(Collectors.toList());
-
-        //1~10000의 숫자를 해시 탐색법으로 입력
         for (int i = 1; i <= SIZE; i++) {
             this.set(i);
         }
@@ -49,26 +46,26 @@ public class SearchService {
         return NOT_FOUND_CODE;
     }
 
-    public int sortedLinearSearch(List<Integer> list, int key) {
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i) == key)
+    public int sortedLinearSearch(int key) {
+        for (int i = 0; i < sortList.size(); i++) {
+            if (sortList.get(i) == key)
                 return i;
-            else if (list.get(i) > key) return NOT_FOUND_CODE;
+            else if (sortList.get(i) > key) return NOT_FOUND_CODE;
         }
         return NOT_FOUND_CODE;
     }
 
-    public int binarySearch(List<Integer> list, int key) {
+    public int binarySearch(int key) {
         int left = 0;
-        int right = list.size() - 1;
+        int right = sortList.size() - 1;
         int mid;
 
         while (left <= right) {
             mid = (left + right) / 2;
-            if (key == (list.get(mid))) {
+            if (key == (sortList.get(mid))) {
                 return mid;
             }
-            if (list.get(mid) <= key) {
+            if (sortList.get(mid) <= key) {
                 left = mid + 1;
             } else {
                 right = mid - 1;
@@ -103,13 +100,13 @@ public class SearchService {
         double startTime = System.currentTimeMillis();
         switch (opt) {
             case "정렬 순차탐색":
-                resultList.add(new SearchResult("정렬 순차 탐색", key, this.sortedLinearSearch(sortList, key)));
+                resultList.add(new SearchResult("정렬 순차 탐색", key, this.sortedLinearSearch(key)));
                 break;
             case "비정렬 순차탐색":
                 resultList.add(new SearchResult("비정렬 순차 탐색", key, this.notSortedLinearSearch(key)));
                 break;
             case "이진탐색":
-                resultList.add(new SearchResult("이진 탐색", key, this.binarySearch(sortList, key)));
+                resultList.add(new SearchResult("이진 탐색", key, this.binarySearch(key)));
                 break;
             case "해시탐색":
                 resultList.add(new SearchResult("해시 탐색", key, this.hashSearch(key)));
@@ -155,6 +152,16 @@ public class SearchService {
 
 
     //hash method
+
+
+    private void set(int num) {
+        int idx = getEmptySpace(num);
+        if (idx < 0) {
+            return;
+        }
+        hash[idx] = num;
+    }
+
     private int getEmptySpace(int num) {
         int idx = num % SIZE;
         int i = 0;
@@ -169,13 +176,5 @@ public class SearchService {
             }
         }
         return idx;
-    }
-
-    private void set(int num) {
-        int idx = getEmptySpace(num);
-        if (idx < 0) {
-            return;
-        }
-        hash[idx] = num;
     }
 }

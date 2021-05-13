@@ -32,14 +32,14 @@ public class SearchController {
     }
 
     @GetMapping("result")
-    public String resultList(Model model) {
+    public String result(Model model) {
         log.info("검색 결과 조회");
         model.addAttribute("resultList", search.getResult());
         return "result";
     }
 
     @PostMapping("findIndex")
-    public String findArray(@ModelAttribute SearchOption searchOpt, Model model) {
+    public String findIndex(@ModelAttribute SearchOption searchOpt, Model model) {
         log.info(searchOpt.getOpt() + "리스트 " + searchOpt.getKey() + "번 인덱스 조회");
         model.addAttribute("result", search.findIndex(searchOpt));
         return "printFindIndex";
